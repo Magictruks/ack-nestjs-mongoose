@@ -27,7 +27,8 @@ export class UserService {
         private readonly userModel: Model<UserDocument>,
         @Helper() private readonly helperService: HelperService,
         @Message() private readonly messageService: MessageService
-    ) {}
+    ) {
+    }
 
     async findAll<T>(
         find?: Record<string, any>,
@@ -112,13 +113,13 @@ export class UserService {
     }
 
     async create({
-        firstName,
-        lastName,
-        password,
-        email,
-        mobileNumber,
-        role
-    }: IUserCreate): Promise<UserDocument> {
+                     firstName,
+                     lastName,
+                     password,
+                     email,
+                     mobileNumber,
+                     role
+                 }: IUserCreate): Promise<UserDocument> {
         const salt: string = await this.helperService.randomSalt();
         const passwordHash = await this.helperService.bcryptHashPassword(
             password,
@@ -130,7 +131,7 @@ export class UserService {
             email: email.toLowerCase(),
             mobileNumber: mobileNumber,
             password: passwordHash,
-            role: new Types.ObjectId(role),
+            role: Types.ObjectId(role),
             isActive: true
         };
 
@@ -145,7 +146,7 @@ export class UserService {
     async deleteOneById(_id: string): Promise<boolean> {
         try {
             this.userModel.deleteOne({
-                _id: new Types.ObjectId(_id)
+                _id: Types.ObjectId(_id)
             });
             return true;
         } catch (e: unknown) {
@@ -159,7 +160,7 @@ export class UserService {
     ): Promise<UserDocument> {
         return this.userModel.updateOne(
             {
-                _id: new Types.ObjectId(_id)
+                _id: Types.ObjectId(_id)
             },
             {
                 firstName: firstName.toLowerCase(),
@@ -178,7 +179,7 @@ export class UserService {
                 email: email
             })
             .where('_id')
-            .ne(new Types.ObjectId(_id))
+            .ne(Types.ObjectId(_id))
             .lean();
 
         const existMobileNumber: UserDocument = await this.userModel
@@ -186,7 +187,7 @@ export class UserService {
                 mobileNumber: mobileNumber
             })
             .where('_id')
-            .ne(new Types.ObjectId(_id))
+            .ne(Types.ObjectId(_id))
             .lean();
 
         const errors: IErrors[] = [];

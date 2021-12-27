@@ -15,6 +15,7 @@ export class UserLoginTransformer {
 
             return {
                 name: value.name,
+                isActive: value.isActive,
                 permissions: permissions
             };
         },
@@ -25,10 +26,10 @@ export class UserLoginTransformer {
     email: string;
     mobileNumber: string;
 
-    @Exclude()
+    // @Exclude()
     firstName: string;
 
-    @Exclude()
+    // @Exclude()
     lastName: string;
 
     @Exclude()

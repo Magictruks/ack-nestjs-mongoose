@@ -29,7 +29,6 @@ export class JwtGuard extends AuthGuard('jwt') {
                 message: 'http.clientError.unauthorized'
             });
         }
-
         return user;
     }
 }
