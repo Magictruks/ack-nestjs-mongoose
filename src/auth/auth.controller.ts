@@ -156,7 +156,7 @@ export class AuthController {
     @AuthJwtRefreshGuard()
     @HttpCode(HttpStatus.OK)
     @Post('/refresh')
-    async refresh(@User() payload: Record<string, any>): Promise<IResponse> {
+    async refresh(@User() payload: Record<string, any>, @Res({ passthrough: true }) response: ResExp): Promise<IResponse> {
         const { _id, rememberMe } = payload;
         const user: IUserDocument = await this.userService.findOneById<IUserDocument>(
             _id,
@@ -197,6 +197,9 @@ export class AuthController {
             newPayload,
             rememberMe
         );
+
+        response.cookie('access-cookie', accessToken,{ httpOnly:true, secure: true });
+        response.cookie('refresh-cookie', refreshToken,{ httpOnly:true, secure: true });
 
         return {
             accessToken,
