@@ -6,7 +6,7 @@ import {
     HttpStatus,
     InternalServerErrorException
 } from '@nestjs/common';
-import { AuthBasicGuard } from 'src/auth/auth.decorator';
+import { AuthBasicGuard, AuthJwtGuard } from 'src/auth/auth.decorator';
 import { ENUM_STATUS_CODE_ERROR } from 'src/error/error.constant';
 import { Response } from 'src/response/response.decorator';
 @Controller('/test')
@@ -47,6 +47,15 @@ export class AppController {
     @HttpCode(HttpStatus.CREATED)
     @Get('/hello-basic')
     async testHelloBasicToken(): Promise<void> {
+        return;
+    }
+
+    // HTTP STATUS MANIPULATE TO 201
+    @Response('app.testHelloBasicToken')
+    @AuthJwtGuard()
+    @HttpCode(HttpStatus.CREATED)
+    @Get('/hello-jwt')
+    async testHelloJWToken(): Promise<void> {
         return;
     }
 }

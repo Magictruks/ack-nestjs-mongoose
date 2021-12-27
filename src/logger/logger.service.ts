@@ -20,7 +20,7 @@ export class LoggerService {
     ): Promise<LoggerDocument> {
         return this.loggerModel.create({
             level: ENUM_LOGGER_LEVEL.INFO,
-            user: new Types.ObjectId(user),
+            user: Types.ObjectId(user),
             anonymous: user ? false : true,
             action,
             description,
@@ -36,7 +36,7 @@ export class LoggerService {
     ): Promise<LoggerDocument> {
         return this.loggerModel.create({
             level: ENUM_LOGGER_LEVEL.DEBUG,
-            user: new Types.ObjectId(user),
+            user: Types.ObjectId(user),
             anonymous: user ? false : true,
             action,
             description,
@@ -52,7 +52,7 @@ export class LoggerService {
     ): Promise<LoggerDocument> {
         return this.loggerModel.create({
             level: ENUM_LOGGER_LEVEL.WARM,
-            user: new Types.ObjectId(user),
+            user: Types.ObjectId(user),
             anonymous: user ? false : true,
             action,
             description,
@@ -68,7 +68,7 @@ export class LoggerService {
     ): Promise<LoggerDocument> {
         return this.loggerModel.create({
             level: ENUM_LOGGER_LEVEL.FATAL,
-            user: new Types.ObjectId(user),
+            user: Types.ObjectId(user),
             anonymous: user ? false : true,
             action,
             description,

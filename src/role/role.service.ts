@@ -72,7 +72,7 @@ export class RoleService {
     }
 
     async create({ name, permissions }: IRoleCreate): Promise<RoleDocument> {
-        const rPermissions = permissions.map((val) => new Types.ObjectId(val));
+        const rPermissions = permissions.map((val) => Types.ObjectId(val));
         const create: RoleDocument = new this.roleModel({
             name: name.toLowerCase(),
             permissions: rPermissions,
@@ -84,7 +84,7 @@ export class RoleService {
 
     async deleteOneById(_id: string): Promise<RoleDocument> {
         return this.roleModel.deleteOne({
-            _id: new Types.ObjectId(_id)
+            _id: Types.ObjectId(_id)
         });
     }
 
@@ -104,7 +104,7 @@ export class RoleService {
     async createMany(data: IRoleCreate[]): Promise<boolean> {
         const newData = data.map((val: IRoleCreate) => ({
             name: val.name.toLowerCase(),
-            permissions: val.permissions.map((val) => new Types.ObjectId(val)),
+            permissions: val.permissions.map((val) => Types.ObjectId(val)),
             isActive: true
         }));
 

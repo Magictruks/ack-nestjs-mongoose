@@ -2,6 +2,7 @@ import { NestApplication, NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from 'src/app/app.module';
 import { ConfigService } from '@nestjs/config';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
     const app: NestApplication = await NestFactory.create(AppModule, {
@@ -11,6 +12,8 @@ async function bootstrap() {
     const configService = app.get(ConfigService);
     const host: string = configService.get<string>('app.http.host');
     const port: number = configService.get<number>('app.http.port');
+
+    app.use(cookieParser());
 
     const logger = new Logger();
     process.env.TZ = process.env.APP_TZ;

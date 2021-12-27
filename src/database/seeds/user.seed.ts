@@ -45,8 +45,8 @@ export class UserSeed {
             await this.userService.create({
                 firstName: 'admin',
                 lastName: 'test',
-                email: 'admin@mail.com',
-                password: '123456',
+                email: 'admin@gmail.com',
+                password: 'admin',
                 mobileNumber: '08111111111',
                 role: role._id
             });
